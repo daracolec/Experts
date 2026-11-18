@@ -2,6 +2,16 @@
 
 This repo holds Dara Cunningham's source documents (Spiro / GES Agency Operations and TMO) and a team of 12 Claude Code subagents in `.claude/agents/`. Every agent reads `context/spiro-standards.md` (house rules, brand, people) and `context/source-index.md` (what each file is). Read source files with `python3 tools/extract_text.py "<file>"`. Save deliverables to `outputs/<workstream>/`.
 
+## Orchestration (default for every request)
+The main session is the orchestrator; subagents cannot call each other. For any request Dara makes in this repo, follow `.claude/skills/ask/SKILL.md`:
+1. Classify it.
+2. Route to the fewest agents needed: lead delivery agent, then advisory review, then rehearsal if asked.
+3. Run independent agents in parallel.
+4. Verify the outputs.
+5. Return one synthesized answer.
+
+Quick factual questions can be answered directly from the sources. `/ask <request>` forces the full routing.
+
 ## Roster
 | Agent | Type | Top deliverables | Build priority |
 |---|---|---|---|
